@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS tv;
+
+CREATE TABLE tv(
+    id INT AUTO_INCREMENT  PRIMARY KEY,
+    sno VARCHAR(15) NOT NULL,
+    brand VARCHAR(25) NOT NULL,
+    price VARCHAR(8) NOT NULL,
+    power_star VARCHAR(1) NOT NULL,
+    screen_size VARCHAR(2) NOT NULL
+);
