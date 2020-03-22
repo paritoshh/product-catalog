@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@Table(name="Products")
 public class ProductData {
 
     @Id

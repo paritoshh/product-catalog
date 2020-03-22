@@ -1,6 +1,9 @@
 package com.product.catalog.util;
 
 import com.google.gson.Gson;
+import com.product.catalog.entity.ProductData;
+import com.product.catalog.entity.TelevisionData;
+import com.product.catalog.mapper.ElectronicsMapper;
 import com.product.catalog.model.Product;
 import com.product.catalog.model.ProductRequestPayload;
 import com.product.catalog.model.Television;
@@ -14,26 +17,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductFactory {
     @Autowired
-    TvRepository tvRepository;
-    @Autowired
     WashingMachineRepository washingMachineRepository;
+    @Autowired
+    ElectronicsMapper electronicsMapper;
 
-    public Product getProductObject(ProductRequestPayload product){
+    public ProductData getProductObject(ProductRequestPayload product){
 
         switch (product.getProductType()){
             case ("TV"):
-                return marshalProductObject(new Television(), product.getPayload(), tvRepository);
+                Product productJson = marshalProductObject(new Television(), product.getPayload());
+                return electronicsMapper.mapTelevision((Television) productJson);
             case ("WASHING_MACHINE"):
-                return marshalProductObject(new WashingMachine(), product.getPayload(), washingMachineRepository);
+                productJson = marshalProductObject(new WashingMachine(), product.getPayload());
+                return electronicsMapper.mapWashingMachine((WashingMachine) productJson);
         }
         return null;
     }
-    private Product marshalProductObject(Product product, String jsonInput, JpaRepository jpaRepository){
+    private Product marshalProductObject(Product product, String jsonInput){
         System.out.println("Class name2::"+product.getClass());
         Gson gson = new Gson();
         product = gson.fromJson(jsonInput, product.getClass());
-        product.setJpaRepository(jpaRepository);
-        System.out.println(product);
+       // product.setJpaRepository(jpaRepository);
 
         return product;
     }

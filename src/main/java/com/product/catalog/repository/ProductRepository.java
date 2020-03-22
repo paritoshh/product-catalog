@@ -1,9 +1,10 @@
 package com.product.catalog.repository;
 
-import com.product.catalog.entity.WashingMachineData;
+import com.product.catalog.entity.ProductData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WashingMachineRepository extends JpaRepository<WashingMachineData, Integer> {
+public interface ProductRepository extends JpaRepository<ProductData, Integer>
+{
 }

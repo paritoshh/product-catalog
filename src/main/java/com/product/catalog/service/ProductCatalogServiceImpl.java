@@ -1,11 +1,9 @@
 package com.product.catalog.service;
 
-import com.product.catalog.entity.TelevisionData;
+import com.product.catalog.entity.ProductData;
 import com.product.catalog.mapper.ElectronicsMapper;
-import com.product.catalog.model.InventoryResponse;
-import com.product.catalog.model.Product;
 import com.product.catalog.model.ProductRequestPayload;
-import com.product.catalog.model.Television;
+import com.product.catalog.repository.ProductRepository;
 import com.product.catalog.util.ProductFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +15,13 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     ProductFactory productFactory;
     @Autowired
     ElectronicsMapper electronicsMapper;
+    @Autowired
+    ProductRepository repository;
+
 
     @Override
-    public InventoryResponse addProduct(ProductRequestPayload product) {
-        Product productDetailsInRequest = productFactory.getProductObject(product);
-        TelevisionData tvData = electronicsMapper.mapTelevision((Television) productDetailsInRequest);
-        productDetailsInRequest.getJpaRepository().save(tvData);
-        //productDetailsInRequest.getUpdateService().addProduct(productDetailsInRequest);
-        return null;
+    public ProductData addProduct(ProductRequestPayload product) {
+        ProductData productDetailsInRequest = productFactory.getProductObject(product);
+        return repository.save(productDetailsInRequest);
     }
-
-
 }

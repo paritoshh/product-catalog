@@ -3,14 +3,16 @@ package com.product.catalog.entity;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Entity
 @Table(name="TV")
 public class TelevisionData extends ElectronicsData {
 
-    @Column(name = "SCREEN_SIZE", nullable = false)
+    @Column(name = "SCREEN_SIZE")
     private String screenSize;
 
     @Builder(builderMethodName = "tvDataBuilder")

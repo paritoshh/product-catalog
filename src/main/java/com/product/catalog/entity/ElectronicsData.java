@@ -5,9 +5,11 @@ import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Getter
+@Table(name = "Electronics")
 public class ElectronicsData extends ProductData {
 
     @Column(name = "POWER_STAR", nullable = false)
