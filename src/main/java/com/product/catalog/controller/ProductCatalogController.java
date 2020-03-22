@@ -29,7 +29,7 @@ public class ProductCatalogController {
     }
 
     @PostMapping(value = "/addAll", produces = {"application/json"})
-    public ResponseEntity<List<ProductData>> addProduct(@RequestBody MultipleProductsRequest products) {
+    public ResponseEntity<List<ProductData>> addProduct(@Valid @RequestBody MultipleProductsRequest products) {
         List<ProductData> response = productCatalogService.addAllProducts(products);
         return new ResponseEntity(response, HttpStatus.OK);
     }
@@ -90,7 +90,7 @@ CREATE TABLE tv(
 }
 
 
-Add multiple:
+Add multiple: max 20 items are allowed to add at a time.
 {
   "products": [
     {

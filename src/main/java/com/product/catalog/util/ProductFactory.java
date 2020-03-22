@@ -42,12 +42,11 @@ public class ProductFactory {
         return null;
     }
     private Product marshalProductObject(Product product, String jsonInput){
-        System.out.println("Class name2::"+product.getClass());
         Gson gson = new Gson();
         product = gson.fromJson(jsonInput, product.getClass());
         Set<ConstraintViolation<Product>> validationErrors = validator.validate(product);
         if (!validationErrors.isEmpty()) {
-            throw new BadRequestDataException(new ConstraintViolationException(validationErrors).getMessage());//Mono.error(new ConstraintViolationException(validationErrors));
+            throw new BadRequestDataException(new ConstraintViolationException(validationErrors).getMessage());
         }
         return product;
     }
