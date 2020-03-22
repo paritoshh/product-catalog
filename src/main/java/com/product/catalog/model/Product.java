@@ -14,5 +14,5 @@ public class Product {
     private String brand;
     private String price;
     private String productType;
-    JpaRepository jpaRepository;
+    //JpaRepository jpaRepository;
 }

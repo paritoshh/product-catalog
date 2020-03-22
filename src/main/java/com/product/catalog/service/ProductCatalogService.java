@@ -3,9 +3,12 @@ package com.product.catalog.service;
 import com.product.catalog.entity.ProductData;
 import com.product.catalog.model.ProductRequestPayload;
 
+import java.util.List;
+
 public interface ProductCatalogService {
 
 
-    public ProductData addProduct(ProductRequestPayload product);
+    ProductData addProduct(ProductRequestPayload product);
+    List<ProductData> fetchAll();
 
 }

@@ -26,8 +26,9 @@ public class ProductCatalogController {
     }
 
     @GetMapping(value = "/products", produces = {"application/json"})
-    public ResponseEntity<List<Product>> fetchAllProducts(){
-        return null;
+    public ResponseEntity<List<ProductData>> fetchAllProducts(){
+        List<ProductData> allProducts = productCatalogService.fetchAll();
+        return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="Products")
 public class ProductData {
@@ -19,9 +19,10 @@ public class ProductData {
     @Column(name = "ID")
     private Integer id;
     @Column(name = "SNO", nullable = false)
-    private final String serialNumber;
+    private String serialNumber;
     @Column(name = "BRAND", nullable = false)
-    private final String brand;
+    private String brand;
     @Column(name = "PRICE", nullable = false)
-    private final String price;
+    private String price;
+
 }
