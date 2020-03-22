@@ -16,8 +16,8 @@ public class ElectronicsData extends ProductData {
     private int powerConsumptionStar;
 
     @Builder(builderMethodName = "ElectonicsDataBuilder")
-    public ElectronicsData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String description){
-        super(id, serialNumber, brand, price, description);
+    public ElectronicsData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String description, String productType){
+        super(id, serialNumber, brand, price, description, productType);
         this.powerConsumptionStar = powerConsumptionStar;
     }
 }

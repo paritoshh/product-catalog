@@ -24,5 +24,7 @@ public class ProductData {
     private String price;
     @Column(name = "DESC", nullable = false)
     private String description;
+    @Column(name = "PRODUCT_TYPE", nullable = false)
+    private String productType;
 
 }

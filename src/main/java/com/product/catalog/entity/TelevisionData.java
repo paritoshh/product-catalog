@@ -18,8 +18,8 @@ public class TelevisionData extends ElectronicsData {
     private String screenSize;
 
     @Builder(builderMethodName = "tvDataBuilder")
-    public TelevisionData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String screenSize, String description) {
-        super(id, serialNumber, brand, price, powerConsumptionStar, description);
+    public TelevisionData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String screenSize, String description, String productType) {
+        super(id, serialNumber, brand, price, powerConsumptionStar, description, productType);
         this.screenSize = screenSize;
     }
 }
