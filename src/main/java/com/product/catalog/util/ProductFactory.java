@@ -37,7 +37,6 @@ public class ProductFactory {
         System.out.println("Class name2::"+product.getClass());
         Gson gson = new Gson();
         product = gson.fromJson(jsonInput, product.getClass());
-       // product.setJpaRepository(jpaRepository);
 
         return product;
     }

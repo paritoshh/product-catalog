@@ -1,9 +1,6 @@
 package com.product.catalog.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Setter
 @Table(name="Products")
 public class ProductData {
 
@@ -24,5 +22,7 @@ public class ProductData {
     private String brand;
     @Column(name = "PRICE", nullable = false)
     private String price;
+    @Column(name = "DESC", nullable = false)
+    private String description;
 
 }

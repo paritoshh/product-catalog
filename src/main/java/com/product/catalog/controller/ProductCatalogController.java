@@ -1,8 +1,7 @@
 package com.product.catalog.controller;
 
 import com.product.catalog.entity.ProductData;
-import com.product.catalog.model.InventoryResponse;
-import com.product.catalog.model.Product;
+import com.product.catalog.model.InventoryActionResponse;
 import com.product.catalog.model.ProductRequestPayload;
 import com.product.catalog.service.ProductCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +37,24 @@ public class ProductCatalogController {
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }
+
     @GetMapping(value = "/brand/{brand}", produces = {"application/json"})
     public ResponseEntity<List<ProductData>> fetchByBrand(@PathVariable("brand") String brand){
         List<ProductData> allProducts = productCatalogService.findProductsForBrand(brand);
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
+    }
+
+    @PutMapping(value = "delete/{id}", produces = {"application/json"})
+    public ResponseEntity<InventoryActionResponse> deleteProduct(@PathVariable("id") Integer id){
+        InventoryActionResponse response = productCatalogService.deleteProduct(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "update/{id}", produces = {"application/json"})
+    public ResponseEntity<ProductData> update(@PathVariable("id") Integer id, @RequestBody ProductRequestPayload productUpdatedDetails){
+        ProductData response = productCatalogService.updateProduct(id, productUpdatedDetails);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
 
@@ -60,9 +72,8 @@ CREATE TABLE tv(
 
 {
   "productType": "TV",
-  "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\"}"
+  "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new andriod TV\"}"
 }
-
 {
   "productType": "WASHING_MACHINE",
   "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\"}"

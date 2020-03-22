@@ -15,8 +15,8 @@ public class WashingMachineData extends ElectronicsData {
     private String operation;
 
     @Builder(builderMethodName = "washingMachineDataBuilder")
-    public WashingMachineData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String capacity, String operation) {
-        super(id, serialNumber, brand, price, powerConsumptionStar);
+    public WashingMachineData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String capacity, String operation, String description) {
+        super(id, serialNumber, brand, price, powerConsumptionStar, description);
         this.capacity = capacity;
         this.operation = operation;
     }

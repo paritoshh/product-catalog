@@ -1,7 +1,6 @@
 package com.product.catalog.model;
 
 import lombok.*;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 @Getter
 @Setter
@@ -14,5 +13,5 @@ public class Product {
     private String brand;
     private String price;
     private String productType;
-    //JpaRepository jpaRepository;
+    private String description;
 }
