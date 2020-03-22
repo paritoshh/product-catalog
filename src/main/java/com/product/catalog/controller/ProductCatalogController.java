@@ -2,6 +2,7 @@ package com.product.catalog.controller;
 
 import com.product.catalog.entity.ProductData;
 import com.product.catalog.model.InventoryActionResponse;
+import com.product.catalog.model.MultipleProductsRequest;
 import com.product.catalog.model.ProductRequestPayload;
 import com.product.catalog.service.ProductCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class ProductCatalogController {
     @PostMapping(value = "/add", produces = {"application/json"})
     public ResponseEntity<ProductData> addProduct(@RequestBody ProductRequestPayload productDetails) {
         ProductData response = productCatalogService.addProduct(productDetails);
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/addAll", produces = {"application/json"})
+    public ResponseEntity<List<ProductData>> addProduct(@RequestBody MultipleProductsRequest products) {
+        List<ProductData> response = productCatalogService.addAllProducts(products);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -72,11 +79,12 @@ CREATE TABLE tv(
 
 {
   "productType": "TV",
-  "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new andriod TV\"}"
+  "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new android TV\"}"
 }
 {
   "productType": "WASHING_MACHINE",
-  "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\"}"
+  "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
 }
+
 
  */

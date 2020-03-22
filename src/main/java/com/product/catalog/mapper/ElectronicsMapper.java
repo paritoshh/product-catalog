@@ -16,6 +16,7 @@ public class ElectronicsMapper {
                 .price(product.getPrice())
                 .powerConsumptionStar(product.getPowerConsumptionStar())
                 .screenSize(product.getScreenSize())
+                .description(product.getDescription())
                 .build();
     }
     public WashingMachineData mapWashingMachine(WashingMachine product){
@@ -26,6 +27,7 @@ public class ElectronicsMapper {
                 .powerConsumptionStar(product.getPowerConsumptionStar())
                 .capacity(product.getCapacity())
                 .operation(product.getOperation())
+                .description(product.getDescription())
                 .build();
     }
 }
