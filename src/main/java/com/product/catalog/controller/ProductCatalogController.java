@@ -8,11 +8,14 @@ import com.product.catalog.service.ProductCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("/inventory")
 public class ProductCatalogController {
 
@@ -20,7 +23,7 @@ public class ProductCatalogController {
     ProductCatalogService productCatalogService;
 
     @PostMapping(value = "/add", produces = {"application/json"})
-    public ResponseEntity<ProductData> addProduct(@RequestBody ProductRequestPayload productDetails) {
+    public ResponseEntity<ProductData> addProduct(@Valid @RequestBody ProductRequestPayload productDetails) {
         ProductData response = productCatalogService.addProduct(productDetails);
         return new ResponseEntity(response, HttpStatus.OK);
     }
@@ -86,5 +89,19 @@ CREATE TABLE tv(
   "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
 }
 
+
+Add multiple:
+{
+  "products": [
+    {
+      "productType": "TV",
+      "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new andriod TV\"}"
+    },
+    {
+      "productType": "WASHING_MACHINE",
+      "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
+    }
+  ]
+}
 
  */

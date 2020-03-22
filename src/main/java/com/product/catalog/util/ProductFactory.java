@@ -3,6 +3,7 @@ package com.product.catalog.util;
 import com.google.gson.Gson;
 import com.product.catalog.entity.ProductData;
 import com.product.catalog.entity.TelevisionData;
+import com.product.catalog.exception.BadRequestDataException;
 import com.product.catalog.mapper.ElectronicsMapper;
 import com.product.catalog.model.Product;
 import com.product.catalog.model.ProductRequestPayload;
@@ -14,12 +15,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
+import java.util.Set;
+
 @Service
 public class ProductFactory {
     @Autowired
     WashingMachineRepository washingMachineRepository;
     @Autowired
     ElectronicsMapper electronicsMapper;
+    @Autowired
+    private Validator validator;
 
     public ProductData getProductObject(ProductRequestPayload product){
 
@@ -37,7 +45,10 @@ public class ProductFactory {
         System.out.println("Class name2::"+product.getClass());
         Gson gson = new Gson();
         product = gson.fromJson(jsonInput, product.getClass());
-
+        Set<ConstraintViolation<Product>> validationErrors = validator.validate(product);
+        if (!validationErrors.isEmpty()) {
+            throw new BadRequestDataException(new ConstraintViolationException(validationErrors).getMessage());//Mono.error(new ConstraintViolationException(validationErrors));
+        }
         return product;
     }
 

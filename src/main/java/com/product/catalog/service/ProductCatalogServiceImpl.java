@@ -39,7 +39,6 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
         products.getProducts().stream().forEach(product->{
             productsData.add(productFactory.getProductObject(product));
         });
-        //ProductData productDetailsInRequest = productFactory.getProductObject(product);
         return repository.saveAll(productsData);
     }
 
