@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ElectronicsMapper {
 
-    public TelevisionData mapTelevision(Television product){
+    public TelevisionData mapTelevision(Television product) {
         return TelevisionData.tvDataBuilder()
                 .serialNumber(product.getSerialNumber())
                 .brand(product.getBrand())
@@ -20,7 +20,8 @@ public class ElectronicsMapper {
                 .productType(product.getProductType())
                 .build();
     }
-    public WashingMachineData mapWashingMachine(WashingMachine product){
+
+    public WashingMachineData mapWashingMachine(WashingMachine product) {
         return WashingMachineData.washingMachineDataBuilder()
                 .serialNumber(product.getSerialNumber())
                 .brand(product.getBrand())

@@ -8,7 +8,6 @@ import com.product.catalog.model.Product;
 import com.product.catalog.model.ProductRequestPayload;
 import com.product.catalog.model.Television;
 import com.product.catalog.model.WashingMachine;
-import com.product.catalog.repository.WashingMachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,6 @@ import java.util.Set;
 
 @Service
 public class ProductFactory {
-    @Autowired
-    WashingMachineRepository washingMachineRepository;
     @Autowired
     ElectronicsMapper electronicsMapper;
     @Autowired
@@ -35,8 +32,9 @@ public class ProductFactory {
             case ("WASHING_MACHINE"):
                 productJson = marshalProductObject(new WashingMachine(), product);
                 return electronicsMapper.mapWashingMachine((WashingMachine) productJson);
+            default:
+                throw new BadRequestDataException("Invalid product type found.");
         }
-        return null;
     }
 
     private Product marshalProductObject(Product product, ProductRequestPayload productInRequest) {

@@ -11,10 +11,16 @@ public interface ProductCatalogService {
 
 
     ProductData addProduct(ProductRequestPayload product);
+
     List<ProductData> fetchAll();
+
     ProductData findProductForId(Integer id);
+
     List<ProductData> findProductsForBrand(String brand);
+
     InventoryActionResponse deleteProduct(Integer id);
+
     ProductData updateProduct(Integer id, ProductRequestPayload updatedProduct);
+
     List<ProductData> addAllProducts(MultipleProductsRequest products);
 }

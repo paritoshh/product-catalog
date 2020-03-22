@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Getter
 @Entity
-@Table(name="TV")
+@Table(name = "TV")
 @NoArgsConstructor
 public class TelevisionData extends ElectronicsData {
 

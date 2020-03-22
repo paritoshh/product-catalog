@@ -35,34 +35,34 @@ public class ProductCatalogController {
     }
 
     @GetMapping(value = "/", produces = {"application/json"})
-    public ResponseEntity<List<ProductData>> fetchAllProducts(){
+    public ResponseEntity<List<ProductData>> fetchAllProducts() {
         List<ProductData> allProducts = productCatalogService.fetchAll();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }
 
     @GetMapping(value = "/id/{id}", produces = {"application/json"})
-    public ResponseEntity<ProductData> fetchById(@PathVariable("id") Integer id){
+    public ResponseEntity<ProductData> fetchById(@PathVariable("id") Integer id) {
         ProductData allProducts = productCatalogService.findProductForId(id);
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }
 
     @GetMapping(value = "/brand/{brand}", produces = {"application/json"})
-    public ResponseEntity<List<ProductData>> fetchByBrand(@PathVariable("brand") String brand){
+    public ResponseEntity<List<ProductData>> fetchByBrand(@PathVariable("brand") String brand) {
         List<ProductData> allProducts = productCatalogService.findProductsForBrand(brand);
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }
 
     @PutMapping(value = "delete/{id}", produces = {"application/json"})
-    public ResponseEntity<InventoryActionResponse> deleteProduct(@PathVariable("id") Integer id){
+    public ResponseEntity<InventoryActionResponse> deleteProduct(@PathVariable("id") Integer id) {
         InventoryActionResponse response = productCatalogService.deleteProduct(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(value = "update/{id}", produces = {"application/json"})
-    public ResponseEntity<ProductData> update(@PathVariable("id") Integer id, @RequestBody ProductRequestPayload productUpdatedDetails){
+    public ResponseEntity<ProductData> update(@PathVariable("id") Integer id, @RequestBody ProductRequestPayload productUpdatedDetails) {
         ProductData response = productCatalogService.updateProduct(id, productUpdatedDetails);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -36,7 +36,7 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     @Override
     public List<ProductData> addAllProducts(MultipleProductsRequest products) {
         List<ProductData> productsData = new ArrayList<>();
-        products.getProducts().stream().forEach(product->{
+        products.getProducts().stream().forEach(product -> {
             productsData.add(productFactory.getProductObject(product));
         });
         return repository.saveAll(productsData);
@@ -64,7 +64,7 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
         } catch (EmptyResultDataAccessException e) {
             return InventoryActionResponse.builder()
                     .code("ERR-101")
-                    .message("Product not found with the id: "+id)
+                    .message("Product not found with the id: " + id)
                     .build();
         }
         return InventoryActionResponse.builder()
@@ -76,7 +76,7 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     @Override
     public ProductData updateProduct(Integer id, ProductRequestPayload updatedProduct) {
         Optional<ProductData> existingDetails = repository.findById(id);
-        if(!existingDetails.isPresent()){
+        if (!existingDetails.isPresent()) {
             throw new BadRequestDataException(
                     new StringBuilder("No record found for product id:").append(id).toString());
         }
