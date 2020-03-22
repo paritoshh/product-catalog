@@ -25,9 +25,22 @@ public class ProductCatalogController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/products", produces = {"application/json"})
+    @GetMapping(value = "/", produces = {"application/json"})
     public ResponseEntity<List<ProductData>> fetchAllProducts(){
         List<ProductData> allProducts = productCatalogService.fetchAll();
+        return new ResponseEntity<>(allProducts, HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/id/{id}", produces = {"application/json"})
+    public ResponseEntity<ProductData> fetchById(@PathVariable("id") Integer id){
+        ProductData allProducts = productCatalogService.findProductForId(id);
+        return new ResponseEntity<>(allProducts, HttpStatus.OK);
+
+    }
+    @GetMapping(value = "/brand/{brand}", produces = {"application/json"})
+    public ResponseEntity<List<ProductData>> fetchByBrand(@PathVariable("brand") String brand){
+        List<ProductData> allProducts = productCatalogService.findProductsForBrand(brand);
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
 
     }

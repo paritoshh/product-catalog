@@ -29,7 +29,16 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     @Override
     public List<ProductData> fetchAll() {
-        List<ProductData> productsInDB = repository.findAll();
-        return productsInDB;
+        return repository.findAll();
+    }
+
+    @Override
+    public ProductData findProductForId(Integer id) {
+        return repository.findById(id).get();
+    }
+
+    @Override
+    public List<ProductData> findProductsForBrand(String brand) {
+        return repository.findByBrand(brand);
     }
 }
