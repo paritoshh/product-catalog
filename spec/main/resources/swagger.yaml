@@ -1,0 +1,277 @@
+swagger: '2.0'
+info:
+  title: Contentserv Code Challenge Product Catalog
+  description: >-
+    Restful Web Services to add, edit, delete and fetch products using different criteria.
+  version: v1
+host: localhost:8080
+basePath: /inventory
+schemes:
+  - http
+tags:
+  - name: Product Catalog API
+paths:
+  /:
+    get:
+      summary: Fetch all products available in the catalog.
+      operationId: fetchAllProducts
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Fetched all products available in the catalog Successfully!
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductData'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL.
+        '500':
+          description: Unexpected Service Error!
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+    post:
+      summary: Add product
+      operationId: addProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Product
+          description: Create new product request
+          required: true
+          schema:
+            $ref: '#/definitions/ProductRequestPayload'
+      responses:
+        '201':
+          description: Successfully Created Product.
+          schema:
+            $ref: '#/definitions/ProductData'
+        '400':
+          description: Bad Request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL.
+        '500':
+          description: Internal server error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+  '/addAll':
+    post:
+      summary: Add maximum 20 products
+      operationId: addProducts
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Products
+          description: Create new multiple products request
+          required: true
+          schema:
+            $ref: '#/definitions/MultipleProductsRequest'
+      responses:
+        '201':
+          description: Successfully Created Multiple Products.
+          schema:
+            $ref: '#/definitions/ProductRequestPayload'
+        '400':
+          description: Bad Request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL.
+        '500':
+          description: Internal server error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+  '/id/{id}':
+    get:
+      summary: Fetch product for the id.
+      operationId: fetchById
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: fetch product for the id
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: Retrieved Product Successfully!.
+          schema:
+            $ref: '#/definitions/ProductData'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL.
+        '500':
+          description: Unexpected Service Error!
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+  '/brand/{brand}':
+    get:
+      summary: Fetch products for the brand.
+      operationId: fetchByBrand
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: brand
+          description: fetch products for the brand
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Fetched all products available in the catalog Successfully!
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductData'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL.
+        '500':
+          description: Unexpected Service Error!
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+  '/update/{id}':
+    put:
+      summary: Edit product for a given id
+      operationId: update
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: id for the product to be updated
+          type: integer
+          required: true
+        - in: body
+          name: Product
+          description: The updated product request
+          schema:
+            $ref: '#/definitions/ProductRequestPayload'
+      responses:
+        '200':
+          description: Successfully Updated Product.
+          schema:
+            $ref: '#/definitions/ProductData'
+        '400':
+          description: Bad Request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL
+        '500':
+          description: Internal server error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+  '/delete/{id}':
+    put:
+      summary: Delete product for a given id. This is an PUT request cause actually any data will not be deleted, however it will be moved to a new audit table(Future enhancement).
+      operationId: deleteProduct
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: id for the product to be deleted
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: Successfully Updated Product.
+          schema:
+            $ref: '#/definitions/InventoryActionResponse'
+        '400':
+          description: Bad Request.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Resource not found or bad URL
+        '500':
+          description: Internal server error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      deprecated: false
+definitions:
+  ErrorResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      result:
+        type: string
+    required:
+      - message
+  InventoryActionResponse:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - message
+  ProductData:
+    type: object
+    properties:
+      id:
+        type: integer
+      serialNumber:
+        type: string
+      message:
+        type: string
+      brand:
+        type: string
+      price:
+        type: string
+      description:
+        type: string
+      productType:
+        type: string
+      powerConsumptionStar:
+        type: string
+      screenSize:
+        type: string
+  ProductRequestPayload:
+    type: object
+    required:
+      - productType
+      - payload
+      - scvCode
+      - countryName
+    properties:
+      productType:
+        type: string
+        pattern: '^[a-zA-Z0-9_-]{1,15}$'
+      payload:
+        type: string
+  MultipleProductsRequest:
+    type: object
+    required:
+      - products
+    properties:
+      products:
+        $ref: '#/definitions/ProductRequestPayload'

@@ -1,0 +1,27 @@
+{
+  "productType": "TV",
+  "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new android TV\"}"
+}
+{
+  "productType": "WASHING_MACHINE",
+  "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
+}
+
+
+Add multiple- max 20 items are allowed to add at a time.
+{
+  "products": [
+    {
+      "productType": "TV",
+      "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new andriod TV\"}"
+    },
+    {
+      "productType": "WASHING_MACHINE",
+      "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
+    }
+  ]
+}
+
+Known issues:
+Update API:
+    We we update TV and provide Washing machine data, it will create an new entry.

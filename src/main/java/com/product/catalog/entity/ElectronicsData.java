@@ -17,7 +17,7 @@ public class ElectronicsData extends ProductData {
     @Column(name = "POWER_STAR", nullable = false)
     private int powerConsumptionStar;
 
-    @Builder(builderMethodName = "ElectonicsDataBuilder")
+    @Builder(builderMethodName = "ElectronicsDataBuilder")
     public ElectronicsData(Integer id, String serialNumber, String brand, String price, int powerConsumptionStar, String description, String productType) {
         super(id, serialNumber, brand, price, description, productType);
         this.powerConsumptionStar = powerConsumptionStar;

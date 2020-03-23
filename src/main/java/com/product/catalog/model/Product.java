@@ -22,9 +22,9 @@ public class Product {
     @Pattern(regexp = "[0-9.]{1,10}")
     private String price;
     @NotNull
-    @Pattern(regexp = "[a-zA-Z- ]{1,15}")
+    @Pattern(regexp = "[a-zA-Z-_ ]{1,15}")
     private String productType;
     @NotNull
-    @Pattern(regexp = "[a-zA-Z0-9- @$%+';()#_:/]{1,100}")
+    @Pattern(regexp = "[a-zA-Z0-9- @$%+';()#_:/.]{1,100}")
     private String description;
 }
