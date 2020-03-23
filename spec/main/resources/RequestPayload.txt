@@ -1,13 +1,14 @@
-{
-  "productType": "TV",
-  "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new android TV\"}"
-}
+Add product: [POST]
+URL: localhost:8080/inventory/
+Payload:
 {
   "productType": "WASHING_MACHINE",
   "payload": "{\"serialNumber\": \"001\",\"brand\": \"MI\",\"price\": \"23000\",\"powerConsumptionStar\": 1,\"capacity\": \"41kg\",\"operation\": \"FrontLoad\",\"description\": \"This is a automatic machine.\"}"
 }
 
-
+Add multiple product: [POST]
+URL: localhost:8080/inventory/
+Payload:
 Add multiple- max 20 items are allowed to add at a time.
 {
   "products": [
@@ -22,6 +23,23 @@ Add multiple- max 20 items are allowed to add at a time.
   ]
 }
 
-Known issues:
-Update API:
-    We we update TV and provide Washing machine data, it will create an new entry.
+
+Fetch all products: [GET]
+URL: localhost:8080/inventory/
+
+Fetch specific product: [GET]
+URL: localhost:8080/inventory/id/3
+
+Fetch all products for given brand: [GET]
+URL: localhost:8080/inventory/brand/MI
+
+Update product: [PUT]
+URL : localhost:8080/inventory/update/3
+Payload:
+{
+      "productType": "TV",
+      "payload": "{\"serialNumber\": \"001\",\"brand\": \"BPL\",\"price\": \"23000\",\"priceRange\": \"2-3\",\"powerConsumptionStar\": 1,\"screenSize\": \"41-inch\",\"description\": \"This is a new andriod TV\"}"
+}
+
+Delete product: [PUT]
+localhost:8080/inventory/delete/4
